@@ -88,6 +88,7 @@ class DbController(object):
         return df[self._definition.export_fields]
 
     def _escape_data(self, df: DataFrame) -> DataFrame:
+        return df
         logger.debug("Escaping symbols")
         escape_chars = dict()
         string_cols = list(df.select_dtypes(include=['object']).columns)
