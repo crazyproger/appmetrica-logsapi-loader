@@ -252,7 +252,7 @@ class Scheduler(object):
             for na in not_archived:
                 result_set.add(na)
 
-            result_set.remove(pd.Timestamp(year=date_to.year, month=date_to.month, day=date_to.day))
+            # result_set.remove(pd.Timestamp(year=date_to.year, month=date_to.month, day=date_to.day))
 
             logger.debug("dates to update {}".format(result_set))
             for pd_date in sorted(result_set, reverse=True):
