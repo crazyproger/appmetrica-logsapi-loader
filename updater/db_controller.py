@@ -89,12 +89,13 @@ class DbController(object):
 
     def _escape_data(self, df: DataFrame) -> DataFrame:
         logger.debug("Escaping symbols")
-        escape_chars = dict()
         string_cols = list(df.select_dtypes(include=['object']).columns)
         for col, type in self._definition.column_types.items():
             if type == 'String' and col in string_cols:
-                escape_chars[col] = _escape_characters
-        df.replace(escape_chars, regex=True, inplace=True)
+                s = df[col]
+                for fr, to in _escape_characters.items():
+                    s = s.str.replace(fr, to)
+                df[col] = s
         return df
 
     @staticmethod
